@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>ChocolateChip-UI Navigation - Routes</title>
+  <link rel="stylesheet" href="../../../dist/css/chui-ios.css">
+  <link rel="stylesheet" href="../css/custom-ios-red.css">
+  <script src="../../../dist/chui.min.js"></script>
+  <script src="../../../dist/widgets.min.js"></script>
+  <script src="../../../data/data.js"></script>
+  <style>
+    .list > li  img {
+      height: 80px;
+      width: auto;
+      margin-right: 10px;
+    }
+    .list > li > div.no-flex {
+      display: flex;
+      max-width: 80px;
+      justify-content: flex-end;
+    }
+    #returning {
+      color: #007aff;
+    }
+    .no-flex {
+      max-width: 200px !important;
+      margin-right: 10px;
+    }
+    [dir=rtl] .list > li  img {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+    [dir=rtl] .no-flex {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <nav id='global-nav'></nav>
+  <ui-screen id='main' class='current'>
+    <nav>
+      <h1>Navigation List</h1>
+    </nav>
+    <section>
+      <h2>Famous People</h2>
+      <ul class="list cloak" id="arrayTemplate1"></ul>
+    </section>
+  </ui-screen>
+
+  <ui-screen id="detail" class="next">
+    <nav>
+      <button class="back">Back</button>
+      <h1>Your Choice</h1>
+    </nav>
+    <section>
+      <h2 id='chosenPerson'></h2>
+      <h2 class='normal-case'>Here's your information:</h2>
+      <ul class="list" id='chosenPersonList'></ul>
+    </section>
+    <footer>
+      <button>Button 2</button>
+    </footer>
+  </ui-screen>
+
+<script>
+
+  /* Array data: */
+  var lums = [
+    {id: 'N356f953', firstName: "Stephen", lastName: "Hawking", image: '../../../images/Hawking.jpg', age: 20},
+    {id: 'Ca0fe1ed', firstName: "Albert", lastName: "Einstein", image: '../../../images/Einstein.jpg', age: 31},
+    {id: 'a51a1852', firstName: "Leonardo", lastName: "Da Vinci", image: '../../../images/DaVinci.jpg', age: 100},
+    {id: 'k4657925', firstName: "Galileo", lastName: "Galilei", image: '../../../images/Galileo.jpg', age: 40},
+    {id: 'F3b2bd1f', firstName: "Nicholas", lastName: "Copernicus", image: '../../../images/Copernicus.jpg', age: 32}
+  ];
+
+
+  $(function() {
+
+    const VIPComponent = new Component({
+      element: '#arrayTemplate1',
+      render: (data) => html`
+        <li data-goto='detail:${ data.id }'>
+          <div class='no-flex'>
+            <img src='${ data.image }' alt=''>
+          </div>
+          <h3>
+            ${ data.firstName } ${ data.lastName }
+          </h3>
+          <aside>
+            <disclosure></disclosure>
+          </aside>
+        </li>`,
+      actions: [{
+        element: 'li',
+        event: 'tap',
+        callback: function() {
+          // console.log($(this).text());
+        }
+      }]
+    })
+
+    const chosenPersonComponent = new Component({
+      element: '#chosenPersonList',
+      render: (data) => html`
+        <li>
+          <h3>First Name: ${ data.firstName }</h3>
+        </li>
+        <li>
+          <h3>Last Name: ${ data.lastName }</h3>
+        </li>
+        <li>
+          <div class='no-flex'>
+            <h3>Your picture:</h3>
+          </div>
+          <img src='${ data.image }' alt="${ data.firstName} + ' ' + ${ data.lastName}">
+        </li>`
+    })
+
+    const chosenPersonNameComponent = new Component({
+      element: '#chosenPerson',
+      render: function(personsName) {
+        return html`<span>Welcome, ${ personsName }.</span>`
+      }
+    })
+
+    let chosenData = 'lums'
+
+    VIPComponent.render(lums);
+    /**
+     * Setup Router:
+     */
+    var appRoutes = new Router()
+    appRoutes.addRoute(
+      {
+        route: 'detail',
+        callback: function(param) {
+          var whichPerson = lums.filter((person) => person.id === param)[0]
+          chosenPersonComponent.render(whichPerson)
+          chosenPersonNameComponent.render(whichPerson.firstName)
+        }
+      }
+    );
+
+  });
+</script>
+</body>

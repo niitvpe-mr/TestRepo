@@ -1,0 +1,14 @@
+S_Store
+._*
+*.tgz
+.Spotlight-V100
+.Trashes
+npm-debug.log
+Thumbs.db
+jspm_packages
+node_modules
+
+reference-apps/jspm/*/js/app.js
+reference-apps/jspm/*/js/app.js.map
+reference-apps/jspm/*/jspm_packages
+reference-apps/jspm/*/node_modules

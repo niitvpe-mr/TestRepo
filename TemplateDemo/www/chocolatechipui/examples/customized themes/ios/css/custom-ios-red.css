@@ -1,0 +1,79 @@
+/* Color navbar and toolbar */
+nav, #globalNav, ui-screen > footer, 
+ui-screen > toolbar,
+input[type="range"] -webkit-track,
+.isDesktop ui-segmented > button:hover,
+ui-segmented > button.selected,
+.isDesktop ui-stepper > button:hover,
+.isDesktop ui-stepper > button.selected,
+.isDesktop ui-stepper > button:hover > span,
+.isDesktop ui-stepper > button.selected > span  {
+  background-color: red;
+}
+/* Color disclosure indicators */
+disclosure {
+  border-color: red;
+}
+button, button.fab {
+  color: red;
+  border-color: red;
+}
+/* Color title and buttons in nav and toolbars */
+nav h1, 
+nav button, 
+toolbar button, 
+footer button, 
+nav .back, 
+#chui-back-arrow,
+.pager > button.selected   {
+  color: #fafafa !important;
+  stroke: #fafafa !important;
+}
+/* Callout text */
+.attentionGrabber {
+  color: red;
+}
+/* Editable List, Select List &  Multi-select List */
+#move-indicator,
+.selection-indicator #checkmark,
+.multi-select-list > li #multi-select-icon  {
+  stroke: red ;
+}
+/* Paging Control */
+#pagination-icons path#page-previous,
+#pagination-icons path#page-next {
+  stroke: #fafafa;
+}
+/* Range Control */
+input[type="range"] {
+  background-image: -webkit-linear-gradient(top, red, red);
+  background-image: linear-gradient(top, red, red);
+}
+/* Segmented Buttons */
+ui-segmented > button {
+  border-color: red;
+  color: red;
+}
+/* Slideout Button */
+button.slide-out-button {
+  background-image: -webkit-linear-gradient(left, #fafafa, #fafafa) !important;
+  background-image: linear-gradient(left, #fafafa, #fafafa) !important;
+}
+button.slide-out-button::before,
+button.slide-out-button::after {
+  background-color: #fafafa;
+}
+/* Stepper Control */
+ui-stepper > label,
+ui-stepper > button {
+  border: solid 1px red;
+}
+/* Switches */
+ui-switch.checked {
+  border-color: red;
+  box-shadow: inset 0 0 0 15px red;
+}
+/* Tabbar */
+ui-tabbar > button.more > .icon::before {
+  color: red !important;
+}

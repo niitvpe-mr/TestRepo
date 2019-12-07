@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>ChocolateChip-UI Out Menu</title>
+  <link rel="stylesheet" href="./dist/css/chui-ios.css">
+  <script src="./dist/chui.min.js"></script>
+  <script src="./dist/widgets.min.js"></script>
+  <script src="data/data.js"></script>
+  <script src="data/fruits.js"></script>
+  <style>
+    /**
+     * Styles for Image Grid
+     */
+    .grid {
+      -webkit-flex-wrap: wrap;
+      -webkit-justify-content: space-around;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      background-color: #222;
+    }
+    .grid > .col {
+      height: 300px;
+      width: 300px;
+      max-height: 300px;
+      max-width: 300px;
+      margin-top: 5px;
+    }
+    @media only ui-screen and (max-width: 481px) {
+      .grid > .col {
+        height: 120px;
+        width: 120px;
+        max-height: 120px;
+        max-width: 120px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: auto 300px;
+        background-color: #000;
+        -webkit-flex-grow: 1;
+        -webkit-flex-shrink: 0;
+        flex-grow: 1;
+        flex-shrink: 0;
+      }
+    }
+  </style>
+
+  <script>
+  $(function() {
+
+    /**
+     * Music Component:
+     */
+    var musicComponent = new Component({
+      element: '#musicList',
+      render: (music) => html`
+        <li>
+          <img  src="${ music.image }" height="80px">
+          <div>
+            <h3>${ music.title }</h3>
+            <h4>${ music.album }</h4>
+            <p>${ music.description }</p>
+          </div>
+        </li>`
+    })
+    musicComponent.render(music)
+
+
+    /**
+     * Image Grid Component:
+     */
+    var imageGridComponent = new Component({
+      element: '#gridOfImages',
+      render: (image) => html`
+        <img class="col" src="${ image }">`
+    })
+    imageGridComponent.render(imageCollection)
+
+    /**
+     * Docs Component:
+     */
+    var docsComponent = new Component({
+      element: '#docsList',
+      render: (doc) => html`
+        <li class='center-vertical'>
+          <h3>${ doc.title }</h3>
+          <h4>${ doc.subtitle }</h4>
+          <aside>
+            <span class='counter'>${ doc.amount }</span>
+          </aside>
+        </li>`
+    })
+    docsComponent.render(docs)
+
+    /**
+     * Recipes Component:
+     */
+
+    function renderSubList(data) {
+      return data.map(item => `<li>${ item }</li>`)
+    }
+    var recipesComponent = new Component({
+      element: '#recipesList',
+      render: (recipe) => html`
+        <li>
+          <div>
+            <h3>${ recipe.name }</h3>
+            <h4>Ingredients</h4>
+            <ul>${ renderSubList(recipe.ingredients) }</ul>
+            <h4>Directions</h4>
+            <ol>${ renderSubList(recipe.directions) }</ol>
+          </div>
+        </li>`
+    })
+    recipesComponent.render(recipes)
+
+    /**
+     * Favorites Component:
+     */
+    var fruitsComponent = new Component({
+      element: '#fruitsList',
+      render: (fruit) => html`
+        <li data-goto='chosenFruit:${ fruit.type }'>
+          <div>
+            <h3>${ fruit.name }</h3>
+          </div>
+          <aside>
+            <disclosure></disclosure>
+          </aside>
+        </li>`
+    })
+    fruitsComponent.render(fruits)
+
+    /**
+     * Chosen Fruit Component:
+     */
+    var chosenFruitComponent = new Component({
+      element: '#chosenFruitList',
+      render: (fruit) => html`
+        <li>
+          <h3>${ fruit }</h3>
+        </li>`
+    })
+
+
+    var appSlideOut = new UISlideOut()
+    appSlideOut.populate([
+      { music: 'Music' },
+      { pictures: 'Pictures' },
+      { documents: 'Documents'},
+      { recipes: 'Recipes' },
+      { fruits: 'Fruits' }
+    ])
+
+    /**
+     * Routes for fruits:
+     */
+    var AppRoutes = new Router()
+    AppRoutes.addRoute({
+      route: 'chosenFruit',
+      callback: function(id) {
+        console.log(id)
+        var renderChosenFruit = function(whichOne) {
+          chosenFruitComponent.render(fruits[whichOne].uses)
+          $('#chosenFruitTitle').text(fruits[whichOne].name)
+        }
+
+        switch (id) {
+          case 'apples':
+            renderChosenFruit(0)
+            break
+          case 'oranges':
+            renderChosenFruit(1)
+            break
+          case 'bananas':
+            renderChosenFruit(2)
+            break
+          case 'peaches':
+            renderChosenFruit(3)
+            break
+          case 'strawberries':
+            renderChosenFruit(4)
+            break
+          case 'cherries':
+            renderChosenFruit(5)
+            break
+        }
+      }
+    })
+  })
+  </script>
+</head>
+<body>
+  <ui-screen role='article'  id="music" class='show'>
+    <nav>
+      <h1>My Stuff</h1>
+    </nav>
+    <section>
+      <h2>Current Choice</h2>
+      <ul class='list' id='musicList'></ul>
+    </section>
+  </ui-screen><ui-screen role='article' id='pictures'>
+    <nav>
+      <h1>Pictures</h1>
+    </nav>
+    <section id='imageGrid'>
+      <div class="grid" id='gridOfImages'></div>
+    </section>
+  </ui-screen>
+
+  <ui-screen role='article' id='documents'>
+    <nav>
+      <h1>Documents</h1>
+    </nav>
+    <section>
+      <ul class='list' id='docsList'></ul>
+    </section>
+  </ui-screen>
+
+  <ui-screen role='article' id='recipes'>
+    <nav>
+      <h1>Recipes</h1>
+    </nav>
+    <section>
+      <h2>Special Dishes</h2>
+      <ul class='list' id='recipesList'></ul>
+    </section>
+  </ui-screen>
+
+  <ui-screen role='article' id='fruits'>
+    <nav>
+      <h1>Fruits</h1>
+    </nav>
+    <section>
+      <h2>Fruits</h2>
+      <ul class='list' id='fruitsList'></ul>
+    </section>
+  </ui-screen>
+
+  <ui-screen role='article' id='chosenFruit' class='next'>
+    <nav>
+      <button class='back' id='back'><span>Back</span></button>
+      <h1>Fruit Uses</h1>
+    </nav>
+    <section>
+      <h2 id='chosenFruitTitle'>fruit</h2>
+      <ul class="list" id='chosenFruitList'></ul>
+    </section>
+  </ui-screen>
+</body>
+</html>

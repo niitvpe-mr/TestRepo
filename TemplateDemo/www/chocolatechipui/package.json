@@ -1,0 +1,67 @@
+{
+  "_from": "chocolatechipui@~5.3.0",
+  "_id": "chocolatechipui@5.3.0",
+  "_inBundle": false,
+  "_integrity": "sha1-fXE3L5NeIcnHv8xIeXBcDO1rqYQ=",
+  "_location": "/chocolatechipui",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "chocolatechipui@~5.3.0",
+    "name": "chocolatechipui",
+    "escapedName": "chocolatechipui",
+    "rawSpec": "~5.3.0",
+    "saveSpec": null,
+    "fetchSpec": "~5.3.0"
+  },
+  "_requiredBy": [
+    "/chui"
+  ],
+  "_resolved": "https://registry.npmjs.org/chocolatechipui/-/chocolatechipui-5.3.0.tgz",
+  "_shasum": "7d71372f935e21c9c7bfcc4879705c0ced6ba984",
+  "_spec": "chocolatechipui@~5.3.0",
+  "_where": "C:\\Users\\NIIT CR\\source\\repos\\TemplateDemo\\TemplateDemo\\node_modules\\chui",
+  "author": {
+    "name": "Robert Biggs and contributors"
+  },
+  "bugs": {
+    "url": "https://github.com/chocolatechip-ui/chocolatechipui/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "JavaScript framework for mobile Web apps and hybrid apps.",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "chocolatechipui": ">= 5.0.0 < 6",
+    "concat": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-jsbeautifier": "^2.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-uglify": "^2.1.2",
+    "gulp-wrapper": "^1.0.0",
+    "min.css": "^1.3.1",
+    "mkdirp": "^0.5.1",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "uglifyjs": "^2.4.10"
+  },
+  "homepage": "http://chocolatechip-ui.github.io",
+  "license": "MIT",
+  "name": "chocolatechipui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chocolatechip-ui/chocolatechipui.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "title": "ChocolateChipUI",
+  "version": "5.3.0"
+}

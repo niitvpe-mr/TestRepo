@@ -1,0 +1,115 @@
+/* Color navbar and toolbar */
+nav, #globalNav, ui-screen > footer, ui-screen > toolbar {
+  background-color: #78c5e4 !important;
+}
+/* Color title and buttons in nav and toolbars */
+nav h1, nav button, toolbar button, footer button, nav .back, #chui-back-arrow  {
+  color: #333 !important;
+  stroke: #333 !important;
+}
+/* Color disclosure indicators */
+disclosure {
+  border-color: #78c5e4;
+}
+/* Color segmented control marker */
+span.androidSelectionBorder,
+ui-tabbar > span.androidSelectionBorder {
+  border-bottom: solid 3px #78c5e4 !important;
+}
+/* Callout text */
+.attentionGrabber {
+  color: #78c5e4;
+}
+/* Editable Lists */
+#move-indicator,
+.list li > .deletion-indicator #checkmark,
+.multi-select-list > li #multi-select-icon,
+.select-list > li.selected #outer-circle {
+  stroke: #78c5e4 !important;
+}
+.list li > .deletion-indicator {
+  border: solid 1px #78c5e4;
+}
+.list.editable > li.selected > .deletion-indicator,
+.list.deletable > li.selected > .deletion-indicator {
+  box-shadow: 0 0 2px 1px #78c5e4;
+}
+
+.multi-select-list > li > aside > span.multi-selection-indicator {
+  border: solid 1px #78c5e4;
+}
+.multi-select-list > li.selected > aside > span.multi-selection-indicator {
+  box-shadow: 0 0 2px 1px #78c5e4;
+}
+#pagination-icons path#page-previous,
+#pagination-icons path#page-next {
+  stroke: #333 !important;
+}
+.pager > button.selected   {
+  color: #333 !important;
+  stroke: #333 !important;
+}
+input[type="range"] {
+  background-image: -webkit-linear-gradient(top, #78c5e4, #78c5e4), -webkit-linear-gradient(top, #cccccc, #cccccc);
+}
+input[type="range"]::-webkit-slider-thumb {
+  background-color: #78c5e4;
+}
+input[type="range"]:active::-webkit-slider-thumb,
+.isDesktop input[type="range"]::-webkit-slider-thumb:hover,
+.isDesktop input[type="range"]:hover::-webkit-slider-thumb {
+  box-shadow: 0 0 0 1px #78c5e4, 0 0 0 8px rgba(0, 0, 0, 0.08);
+}
+.isDesktop input[type="range"]::-webkit-slider-thumb:hover::before {
+  background-color: #78c5e4;
+}
+.isNativeAndroidBrowser input[type="range"] {
+  background-image: -webkit-linear-gradient(top, #78c5e4, #78c5e4);
+}
+textarea,
+input[type=text],
+input[type=number],
+input[type=password],
+input[type=email],
+input[type=url],
+input[type=text] {
+  background-image: 
+     -webkit-linear-gradient(left, #78c5e4, #78c5e4),
+     -webkit-linear-gradient(left, #ccc, #ccc);
+  background-image: 
+     linear-gradient(to right, #78c5e4, #78c5e4),
+     linear-gradient(to right, #ccc, #ccc);
+}
+ui-segmented > span.androidSelectionBorder {
+  border-bottom: solid 3px #78c5e4;
+}
+.select-list > li.selected #inner-circle {
+  fill: #78c5e4 !important;
+}
+button.slide-out-button {
+  background-image: -webkit-linear-gradient(left, #333, #333) !important;
+  background-image: linear-gradient(left, #333, #333) !important;
+}
+button.slide-out-button::before,
+button.slide-out-button::after {
+  background-color: #333;
+}
+ui-switch {
+  background-image: -webkit-linear-gradient(left, #78c5e4, #78c5e4), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  background-image: linear-gradient(to left, #78c5e4, #78c5e4), linear-gradient(to left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+}
+ui-switch.checked > em {
+  background-color: #78c5e4;
+}
+ui-switch.traditional.checked > em {
+  background-color: #78c5e4;
+  border: solid 1px #78c5e4;
+}
+.isDesktop ui-tabbar>button:hover {
+  background-color: #78c5e4 !important;
+  color: #fff !important;
+}
+ui-tabbar ~ ui-screen > nav {
+  background-color: #78c5e4 !important;
+  border-bottom: 1px solid #78c5e4 !important;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>ChocolateChip-UI Select List - Arabic</title>
+  <link rel="stylesheet" href="./dist/css/chui-ios.css">
+  <script src="./dist/chui.min.js"></script>
+  <script src="./dist/widgets.min.js"></script>
+  <script>
+    $(function() {
+      /**
+       * TODO data:
+       */
+      const todosStore = new State([
+        {value: "أكل", label: "يذهب يأكل شيئا."},
+        {value: "قيلولة", label: "أخذ غفوة."},
+        {value: "عمل", label: "الحصول على بعض العمل المنجز."},
+        {value: "لعب", label: "تلعب لعبة."}
+      ])
+
+      const selectList = new UISelectList({
+        element: '#my-list',
+        selected: 0,
+        name: 'my-list',
+        state: todosStore,
+        value: 'name',
+        render: (todo) => html`
+          <li data-select="${ todo.value}">
+            <h3>${ todo.label }</h3>
+          </li>`,
+        callback: function() {
+          renderSelection()
+        }
+      })
+      selectList.render()
+      /* Define callback for select list. */
+      var renderSelection = function() {
+        var value = selectList.value
+        $('.attentionGrabber').text(value)
+      }
+      /* Render default value. */
+      renderSelection()
+    })
+  </script>
+</head>
+<body>
+  <ui-screen id='select-example'>
+    <nav>
+      <h1>قائمة الاختيار</h1>
+    </nav>
+    <section>
+      <h2>المهام للقيام</h2>
+      <ul id="my-list" class='list select-list'></ul>
+      <p>أنت ذاهب ل: <strong><span id="response" class='attentionGrabber'></span></strong></p>
+    </section>
+  </ui-screen>
+</body>
+</html>

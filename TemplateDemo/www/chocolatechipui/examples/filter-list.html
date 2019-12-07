@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>ChocolateChip-UI Filter</title>
+  <link rel="stylesheet" href="./dist/css/chui-ios.css">
+  <script src="./dist/chui.min.js"></script>
+  <script src="./dist/widgets.min.js"></script>
+   <style>
+    body.themeIsAndroid .SortOrderArrow {
+      fill: #555 !important;
+    }
+    body.themeIsAndroid .sortButtons button svg {
+      margin-top: 4px;
+    }
+  </style> 
+</head>
+<body>
+  <ui-screen id='main' class="current">
+    <nav>
+      <h1>Filter and Sort</h1>
+    </nav>
+    <section>
+      <h2>Filter by First or Last Name:</h2>
+      <p id='sortNames'><input id='filterByName' type="text" placeholder='first or last name'></p>
+      <br>
+      <h2>Sort by Last Name or Age:</h2>
+      <p class='sortButtons'>
+        <button id='sortByName'>Last Name
+        <svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <path class="SortOrderArrow" fill="#007aff" d="M10,3.94703249e-15 L5,6 L0,0 L10,3.94703249e-15 Z" id="Triangle"></path>
+        </svg>
+      </button>
+      <button id='sortByAge'>Age
+        <svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <path class="SortOrderArrow" fill="#007aff" d="M10,3.94703249e-15 L5,6 L0,0 L10,3.94703249e-15 Z" id="Triangle"></path>
+        </svg>
+      </button>
+      </p>
+      <ul id="listView" class='list'>
+
+      </ul>
+    </section>
+  </ui-screen>
+
+  <script>
+
+  $(function() {
+    const filterByName = document.querySelector('#filterByName')
+
+    /**
+     * Plain data object:
+     */
+    var people = [
+      {firstName: "Joe", lastName: "Bodoni", age: 28},
+      {firstName: "Sue", lastName: "Higgins", age: 22},
+      {firstName: "John", lastName: "Doe", age: 32},
+      {firstName: "Betty", lastName: "Bonnet", age: 26},
+      {firstName: "Steve", lastName: "Martin", age: 25},
+      {firstName: "Joe", lastName: "Carson", age: 27},
+      {firstName: "Sam", lastName: "Taylor", age: 31},
+      {firstName: "Mary", lastName: "Martin", age: 21},
+      {firstName: "Paul", lastName: "Quintin", age: 34},
+      {firstName: "Debbie", lastName: "Abernathy", age: 29},
+      {firstName: "William", lastName: "Gonzalez", age: 41}
+    ]
+    /** State object */
+    var peopleState = new State(people)
+
+    /**
+     * Filter the model.
+     * Make case insensitive:
+     */
+    function filterNames() {
+      var val = filterByName.value
+      if (val) val = val.toLowerCase()
+      /**
+       * Check that word characters were entered:
+       */
+      if (val === '') peopleComponent.render(persons)
+      if (!/\w/.test(val)) return
+      /**
+       * Find a match:
+       */
+      var persons = peopleState.filter(function(person) {
+        var name = person.firstName.toLowerCase() + ' ' + person.lastName.toLowerCase()
+        return name.match(val)
+      })
+      peopleComponent.render(persons)
+    }
+
+    // Create people list component:
+    var peopleComponent = new Component({
+      element: '#listView',
+      render: (data) => html`
+        <li>
+          <h3>${ data.firstName } ${ data.lastName }, Age: ${ data.age }</h3>
+        </li>`,
+      state: peopleState
+    })
+    peopleComponent.render()
+
+    // Create component to search by name:
+    const sortByNamesComponent = new Component({
+      element: '#sortNames',
+      actions: [
+        {
+          element: 'input',
+          event: 'input',
+          callback: function() {
+            filterNames()
+          }
+        }
+      ],
+      styles: {
+        input: {
+          padding: 4,
+          fontSize: 14
+        }
+      }
+    })
+
+    // Create component to order by last name or age:
+    const sortNamesComponent = new Component({
+      element: '.sortButtons',
+      actions: [
+        {
+          element: '#sortByName',
+          event: 'tap',
+          callback: function() {
+            var hyphen = '-'
+            sortOrder = this.classList.contains('descending')
+            hyphen = sortOrder ? '' : '-'
+
+            peopleState.orderBy(hyphen + 'lastName', hyphen + 'firstName')
+            if (filterByName.value !== '') {
+              filterNames()
+            } else {
+              peopleComponent.render()
+            }
+            this.classList.toggle('descending')
+          }
+        },
+        {
+          element: '#sortByAge',
+          event: 'tap',
+          callback: function() {
+            var hyphen = '-'
+            sortOrder = this.classList.contains('descending')
+            hyphen = sortOrder ? '' : '-'
+            peopleState.orderBy(hyphen + 'age')
+            if (filterByName.value !== '') {
+              filterNames()
+            } else {
+              peopleComponent.render()
+            }
+            this.classList.toggle('descending')
+            console.log(this)
+          }
+        }
+      ],
+      styles: {
+        button: {
+          marginBottom: 10,
+          svg: {
+            transition: 'all .25s ease-out',
+            'margin-left': 5,
+            transform: 'rotate(-180deg)'
+          },
+          ':first-child': {
+            marginLeft: 0
+          }
+        },
+        'button.descending > svg': {
+          transform: 'rotate(0deg)'
+        }
+      }
+    })
+
+  })
+  </script>
+</body>
+</html>

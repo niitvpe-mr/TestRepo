@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>ChocolateChip-UI Paging</title>
+  <link rel="stylesheet" href="../../../dist/css/chui-android.css">
+  <link rel="stylesheet" href="../css/custom-android-red.css">
+  <script src="../../../dist/chui.min.js"></script>
+  <script src="../../../dist/widgets.min.js"></script>
+  <script src="../../../dist/utils/array_chunk.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      var pagingData = [
+          'Thing One',
+          'Thing Two',
+          'Thing Three',
+          'Thing Four',
+          'Thing Five',
+          'Thing Six',
+          'Thing Seven',
+          'Thing Eight',
+          'Item One',
+          'Item Two',
+          'Item Three',
+          'Item Four',
+          'Item Five',
+          'Item Six',
+          'Thing 1',
+          'Thing 2',
+          'Thing 3',
+          'Thing 4',
+          'Thing 5',
+          'Thing 6',
+          'Thing 7',
+          'Thing 8',
+          'Item 1',
+          'Item 2',
+          'Item 3',
+          'Item 4',
+          'Item 5',
+          'Item 6',
+          'Another Thing One',
+          'Another Thing Two',
+          'Another Thing Three',
+          'Another Thing Four',
+          'Another Thing Five',
+          'Another Thing Six',
+          'Another Thing Seven',
+          'Another Thing Eight'
+
+      ]
+
+      var paging = new UIPaging({
+        screen: '#paging',
+        data: pagingData,
+        size: 6,
+        render: (chunks) => html`
+          ${chunks.map((chunk, idx) => html`
+            <article  class="${idx === 0 ? 'current' : 'next'}">
+              <br>
+              <h2>Section ${idx + 1}</h2>
+              <ul class='list'>
+                ${chunk.map(item => `<li>${item}</li>`)}
+              </ul>
+            </article>`)
+          }`
+      })
+
+      paging.render()
+
+    });
+  </script>
+</head>
+<body>
+  <ui-screen id="paging" class='current'>
+    <nav>
+      <h1>Paging</h1>
+    </nav>
+    <section class='paging'></section>
+  </ui-screen>
+</body>
+</html>
